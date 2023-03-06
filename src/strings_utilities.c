@@ -24,9 +24,10 @@ char** prepareArgsPointer(){
         } else
             c++;
     }
-    char** pt = malloc(c * sizeof(char*));
+    char** pt = malloc((c+1) * sizeof(char*));
     for(int i = 0 ; i < c ; i++)
         pt[i] = args[i];
+    pt[c] = NULL;
     return pt;
 }
 
