@@ -4,34 +4,30 @@
 
 #include "main.h"
 
+char buffer[BUFFER_SIZE];
+char command[COMMAND_SIZE];
+char args[MAX_PARAMETERS_NUMBER][50];
+
 // ------------------ Main ------------------
 int main(){
-    for(int i = 0 ; i < 3 ; i++){
+    system("clear");
+    printf("\t\t\tOperating Systems Course - Unix Shell Lab\n\t\t\tShell Is Operating\n");
+    printf("----------------------------------------------------------------------------\n\n");
+    while(1){
+        printf("\nEnter Command To Execute:\n");
+        clearGlobalVars();
         scanInput();
-        printf("%s\n", buffer);
-        printf("%lu\n", strlen(buffer));
+        prepareParams();
+//        showArgs();
         if(checkForTermination())
             break;
+        if(fork() != 0)
+            wait(NULL);
+        else {
+            execvp(command, prepareArgsPointer());
+            return 0;
+        }
     }
     printf("Finished\n");
-    return 0;
-}
-
-void scanInput(){
-    fgets(buffer, 200, stdin);
-    buffer[strlen(buffer)-1] = '\0';
-}
-
-int checkForTermination(){
-    const char* exitStatement = "exit";
-    if(strlen(buffer) == 4){
-        int i = 0;
-        for( ; i < 4 ; i++){
-            if(buffer[i] != exitStatement[i])
-                break;
-        }
-        if(i == 4)
-            return 1;
-    }
     return 0;
 }

@@ -12,13 +12,19 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
+#include "strings_utilities.h"
+
+// Global Definitions
+#define BUFFER_SIZE 200
+#define COMMAND_SIZE 30
+#define MAX_PARAMETERS_NUMBER 10
 
 // Functions Prototype
 int main();
-void scanInput();
-int checkForTermination();
 
 // Global Variables
-char buffer[200];
+extern char buffer[BUFFER_SIZE];
+extern char command[COMMAND_SIZE];
+extern char args[MAX_PARAMETERS_NUMBER][50];
 
 #endif //LAB__01_MAIN_H
