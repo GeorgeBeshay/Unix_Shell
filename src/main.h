@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "strings_utilities.h"
+#include "colors.h"
 
 // Global Definitions
 #define BUFFER_SIZE 200

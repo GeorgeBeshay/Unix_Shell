@@ -84,7 +84,8 @@
 			"sourceIndexes" : 
 			[
 				1,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -110,6 +111,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "strings_utilities.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "colors.h",
 			"sourceGroupIndex" : 1
 		}
 	],
