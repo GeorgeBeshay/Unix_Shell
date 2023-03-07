@@ -5,6 +5,7 @@
 #include "strings_utilities.h"
 
 void clearGlobalVars(){
+    backgroundFlag = 0;
     strcpy(buffer, "");
     strcpy(command, "");
     for(int i = 0 ; i < MAX_PARAMETERS_NUMBER ; i++)
@@ -12,8 +13,12 @@ void clearGlobalVars(){
 }
 
 void scanInput(){
-    fgets(buffer, 200, stdin);
+    fgets(buffer, BUFFER_SIZE, stdin);
     buffer[strlen(buffer)-1] = '\0';
+    if(buffer[strlen(buffer)-1] == '&') {
+        backgroundFlag = 1;
+        buffer[strlen(buffer)-1] = '\0';
+    }
 }
 
 char** prepareArgsPointer(){
@@ -60,14 +65,15 @@ void prepareParams(){
 }
 
 int checkForTermination(){
-    const char* exitStatement = "exit";
-    if(strlen(buffer) == 4){
+    const char* exitStatement = "exit ";
+    if(strlen(buffer) >= 4){
         int i = 0;
-        for( ; i < 4 ; i++){
+        int maxLen = (strlen(buffer) == 4) ? 4 : 5;
+        for( ; i < maxLen ; i++){
             if(buffer[i] != exitStatement[i])
                 break;
         }
-        if(i == 4)
+        if(i == maxLen)
             return 1;
     }
     return 0;
