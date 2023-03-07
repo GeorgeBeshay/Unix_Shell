@@ -61,6 +61,12 @@ build CMakeFiles/src.dir/strings_utilities.c.o: C_COMPILER__src_Debug /home/geor
   OBJECT_DIR = CMakeFiles/src.dir
   OBJECT_FILE_DIR = CMakeFiles/src.dir
 
+build CMakeFiles/src.dir/assistant.c.o: C_COMPILER__src_Debug /home/george/College/CSED$ Level$ 2/Spring$ Semester/CSE$ x61$ -$ Operating$ Systems/Labs/Unix_Shell/src/assistant.c || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/assistant.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target src
@@ -69,7 +75,7 @@ build CMakeFiles/src.dir/strings_utilities.c.o: C_COMPILER__src_Debug /home/geor
 #############################################
 # Link the executable src
 
-build src: C_EXECUTABLE_LINKER__src_Debug CMakeFiles/src.dir/main.c.o CMakeFiles/src.dir/strings_utilities.c.o
+build src: C_EXECUTABLE_LINKER__src_Debug CMakeFiles/src.dir/main.c.o CMakeFiles/src.dir/strings_utilities.c.o CMakeFiles/src.dir/assistant.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/src.dir
   POST_BUILD = :
