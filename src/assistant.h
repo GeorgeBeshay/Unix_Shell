@@ -15,5 +15,6 @@ void showProcessNegIDError();
 void printTerminationStatement();
 void logProcessTermination(int ProcessID);
 void clearTheNewLine(char* s);
+void showInvalidDirectoryError();
 
 #endif //SRC_ASSISTANT_H

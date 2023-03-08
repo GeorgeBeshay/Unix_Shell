@@ -12,6 +12,21 @@ void clearGlobalVars(){
         strcpy(args[i], "");
 }
 
+void filterBuffer(){
+    int whiteSpacesCount = 0;
+    if(strlen(buffer) > 0){
+        while(whiteSpacesCount < strlen(buffer) && buffer[whiteSpacesCount] == ' ')
+            whiteSpacesCount++;
+    }
+    if(whiteSpacesCount > 0) {
+        char tempBufferCopy[BUFFER_SIZE];
+        strcpy(tempBufferCopy, buffer);
+        for (int i = whiteSpacesCount ; i < BUFFER_SIZE + whiteSpacesCount ; i++){
+            buffer[i - whiteSpacesCount] = tempBufferCopy[i];
+        }
+    }
+}
+
 void scanInput(){
     fgets(buffer, BUFFER_SIZE, stdin);
     buffer[strlen(buffer)-1] = '\0';
@@ -19,6 +34,7 @@ void scanInput(){
         backgroundFlag = 1;
         buffer[strlen(buffer)-1] = '\0';
     }
+    filterBuffer();
 }
 
 char** prepareArgsPointer(){
@@ -66,15 +82,35 @@ void prepareParams(){
 
 int checkForTermination(){
     const char* exitStatement = "exit ";
-    if(strlen(buffer) >= 4){
+    if(compareBufferTo(exitStatement))
+        return EXIT_FLAG;
+    return 0;
+}
+
+int compareBufferTo(const char* commandToCompareWith){
+    int commandLength = strlen(commandToCompareWith);
+    if(strlen(buffer) >= commandLength - 1){
         int i = 0;
-        int maxLen = (strlen(buffer) == 4) ? 4 : 5;
+        int maxLen = (strlen(buffer) == commandLength - 1) ? commandLength - 1 : commandLength;
         for( ; i < maxLen ; i++){
-            if(buffer[i] != exitStatement[i])
+            if(buffer[i] != commandToCompareWith[i])
                 break;
         }
         if(i == maxLen)
             return 1;
     }
+    return 0;
+}
+
+int checkForShellBuiltInCommand(){
+    const char* cdCommand = "cd ";
+    if(compareBufferTo(cdCommand))
+        return CD_FLAG;
+    const char* echoCommand = "echo ";
+    if(compareBufferTo(echoCommand))
+        return ECHO_FLAG;
+    const char* exportCommand = "export ";
+    if(compareBufferTo(exportCommand))
+        return EXPORT_FLAG;
     return 0;
 }

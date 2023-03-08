@@ -14,5 +14,8 @@ void prepareParams();
 void showArgs();
 int checkForTermination();
 void clearGlobalVars();
+void filterBuffer();
+int compareBufferTo(const char* commandToCompareWith);
+int checkForShellBuiltInCommand();
 
 #endif //SRC_STRINGS_UTILITIES_H

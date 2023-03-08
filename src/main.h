@@ -25,13 +25,20 @@
 #define COMMAND_SIZE 30
 #define MAX_PARAMETERS_NUMBER 10
 #define WORKING_DIRECTORY "../Working_Directory"
+#define CD_FLAG 7
+#define ECHO_FLAG 8
+#define EXPORT_FLAG 9
+#define EXIT_FLAG 10
 
 // Functions Prototype
 int main();
 void shell();
 void childSignalHandler(int signalNumber);
 void setupEnvironment();
-void execute_shell_builtin();
+void evaluate_expression();
+void executeCommand();
+void executeShellBuiltIn();
+void evaluateExpression();
 
 // Global Variables
 extern char buffer[BUFFER_SIZE];
