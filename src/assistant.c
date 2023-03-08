@@ -47,7 +47,7 @@ void logProcessTermination(int processID){
     time(&rawTime);
     char* logStatement = asctime(localtime(&rawTime));      // will insert a \n at the end
     clearTheNewLine(logStatement);
-    FILE* loggingFile = fopen("../ProcessesTerminationLogFile.txt", "a");
+    FILE* loggingFile = fopen("ProcessesTerminationLogFile.txt", "a");
     fputs("@ - ", loggingFile);
     fputs(logStatement, loggingFile);
     fprintf(loggingFile, "\b - Process [%d] Terminated.\n", processID);

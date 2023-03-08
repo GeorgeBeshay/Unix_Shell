@@ -24,11 +24,14 @@
 #define BUFFER_SIZE 200
 #define COMMAND_SIZE 30
 #define MAX_PARAMETERS_NUMBER 10
+#define WORKING_DIRECTORY "../Working_Directory"
 
 // Functions Prototype
 int main();
 void shell();
 void childSignalHandler(int signalNumber);
+void setupEnvironment();
+void execute_shell_builtin();
 
 // Global Variables
 extern char buffer[BUFFER_SIZE];

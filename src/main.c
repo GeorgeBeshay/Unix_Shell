@@ -12,11 +12,33 @@ int backgroundFlag;
 
 // ------------------ Main ------------------
 int main(){
-    printInitializationStatement();
+    /*
+     * 1- Register the child signal to the appropriate signal handler
+     * 2- Setup the working environment by choosing the declared
+     *      path of the working directory, and printing an initialization statement.
+     * 3- Run the shell
+     * 4- When shell terminates, print a termination statement.
+     */
     signal(SIGCHLD, childSignalHandler);
+    setupEnvironment();
     shell();
     printTerminationStatement();
     return 0;
+}
+
+void execute_shell_builtin(){
+     /*
+      * Implement the function to execute the appropriate method that corresponds
+      * to the requested command
+      * - cd
+      * - echo
+      * - export
+      */
+}
+
+void setupEnvironment(){
+    chdir(WORKING_DIRECTORY);
+    printInitializationStatement();
 }
 
 void childSignalHandler(int signalNumber) {
@@ -47,7 +69,7 @@ void shell(){
         scanInput();
         prepareParams();
         if(checkForTermination())
-            return;
+            break;
         pid_t processID = fork();
         if(processID > 0) {
             printf("Parent Process ID: %d \n", getpid());
@@ -67,6 +89,7 @@ void shell(){
             exit(EXIT_FAILURE);
         }
     }
+    logProcessTermination(getpid());
 }
 
 
