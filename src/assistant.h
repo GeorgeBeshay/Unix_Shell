@@ -16,5 +16,6 @@ void printTerminationStatement();
 void logProcessTermination(int ProcessID);
 void clearTheNewLine(char* s);
 void showInvalidDirectoryError();
+void showInvalidExportError();
 
 #endif //SRC_ASSISTANT_H

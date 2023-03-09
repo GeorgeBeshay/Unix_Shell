@@ -17,5 +17,9 @@ void clearGlobalVars();
 void filterBuffer();
 int compareBufferTo(const char* commandToCompareWith);
 int checkForShellBuiltInCommand();
+char** getExportingData(char* variable, char* value, int x, char tempString[x]);
+int stringContainsChar(char* word, char c);
+void echoStatement();
+void evaluate();
 
 #endif //SRC_STRINGS_UTILITIES_H

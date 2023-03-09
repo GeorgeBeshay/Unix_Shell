@@ -8,8 +8,9 @@
 
 char buffer[BUFFER_SIZE];
 char command[COMMAND_SIZE];
-char args[MAX_PARAMETERS_NUMBER][50];
+char args[MAX_PARAMETERS_NUMBER][MAX_PARAMETER_SIZE];
 int backgroundFlag;
+int errorWhileScanning;
 
 
 // ------------------ Main ------------------
@@ -59,7 +60,13 @@ void shell(){
         printf("\nEnter A Command To Execute:\n");
         clearGlobalVars();
         scanInput();
+        evaluate();
+//        printf("BUFFER IS: %s\n", buffer);
         prepareParams();
+        if(errorWhileScanning){
+            showInvalidCommandError();
+            continue;
+        }
         if(checkForTermination())
             break;
         if(checkForShellBuiltInCommand())
@@ -73,7 +80,7 @@ void shell(){
 void executeShellBuiltIn(){
     switch (checkForShellBuiltInCommand()) {
         case CD_FLAG:{
-            int operationStatus = chdir(args[1]);
+            int operationStatus = (strcmp(args[1], "~") == 0 || strcmp(args[1], "") == 0) ? chdir(HOME_PATH) : chdir(args[1]);
             if(operationStatus)
                 showInvalidDirectoryError();
             else
@@ -81,11 +88,28 @@ void executeShellBuiltIn(){
             break;
         }
         case ECHO_FLAG: {
-            printf("In Echo\n");
+//            printf("In Echo\n");
+//            showArgs();
+            echoStatement();
             break;
         }
         case EXPORT_FLAG: {
-            printf("In Export\n");
+//            printf("In Export\n");
+            char* variableName = NULL, * variableValue = NULL;
+            char tempString[strlen(args[1])];
+            strcpy(tempString, args[1]);
+            char** returned = getExportingData(variableName, variableName, (int)strlen(args[1]), tempString);
+            if(returned != NULL) {
+                variableName = returned[0];
+                variableValue = returned[1];
+//            if(getExportingData(variableName, variableValue, (int)strlen(args[1]), tempString) == 0) {
+//                printf("!!Name = %s\n", variableName);
+//                printf("!!Value = %s\n", variableValue);
+                setenv(variableName, variableValue, 1);
+//                printf("%s", getenv(variableName));
+
+//            }
+            }
             break;
         }
         default: {

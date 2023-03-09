@@ -43,6 +43,10 @@ void showInvalidCommandError(){
     printf("%sINVALID COMMAND%s\n", KRED, KCYN);
 }
 
+void showInvalidExportError(){
+    printf("%sINVALID EXPORT STATEMENT%s\n", KRED, KCYN);
+}
+
 void showInvalidDirectoryError(){
     printf("%sINVALID DIRECTORY%s\n", KRED, KCYN);
 }
