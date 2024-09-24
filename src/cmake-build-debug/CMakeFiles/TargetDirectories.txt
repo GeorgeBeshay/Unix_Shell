@@ -1,3 +1,0 @@
-/home/george/College/CSED Level 2/Spring Semester/CSE x61 - Operating Systems/Labs/Unix_Shell/src/cmake-build-debug/CMakeFiles/src.dir
-/home/george/College/CSED Level 2/Spring Semester/CSE x61 - Operating Systems/Labs/Unix_Shell/src/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/george/College/CSED Level 2/Spring Semester/CSE x61 - Operating Systems/Labs/Unix_Shell/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
